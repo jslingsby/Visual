@@ -47,10 +47,11 @@ CP_toner <- ggmap(get_map(location = b, source = "stamen", maptype = "toner", cr
 
 CP_wc <- ggmap(get_map(location = b, source = "stamen", maptype = "watercolor", crop = TRUE, zoom = 11))
 
+
 ### Make the plot
 x <- as.data.frame(rasterToPoints(CP_dem))
 
-ggplot() + geom_raster(data=x, aes(x=x, y=y, fill=cct_10m, alpha=.5)) + coord_fixed(1.313324)  + theme(legend.position="none")
+ggplot() + geom_raster(data=x, aes(x=x, y=y, fill=cct_10m, alpha=.5)) + coord_fixed(1.313324) + theme(legend.position="none")
 
 CP_toner + geom_polygon(data = ffd, aes(x = long, y = lat, group = id), alpha = 0.25) + coord_map()
 
@@ -58,6 +59,8 @@ CP_wc + geom_polygon(data = ffd, aes(x = long, y = lat, group = id), alpha = 0.2
 
 CP_wc + geom_raster(data=x, aes(x=x, y=y, fill=cct_10m, alpha=.25)) + coord_fixed(1.313324)  + theme(legend.position="none")
   
+ggsave("Output/CapePeninsula_watercolour.pdf", CP_wc, width=5, height=8)
+
 # Just fires
 #p <- ggplot() + geom_polygon(data = ffd, aes(x = long, y = lat, group = id), alpha = 0.5) + coord_map()
 #p
